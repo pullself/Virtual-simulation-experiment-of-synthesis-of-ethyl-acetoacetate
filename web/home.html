@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>欢迎登录虚拟仿真实验平台</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="container"  >
+    <img src="img/logo.gif" class="logo">
+    <div class="top_right" >
+        <ul>
+            <img src="img/user.png" style="float: left;width: 30px;height: 30px;padding-top: 12px;padding-bottom: 18px;">
+            <li><a class="prepare" style="list-style-image: url(img/user.png)">游客</a></li>
+            <li><a class="home" href="home.html" style="border-left: #ebebeb;border-left-style: solid;border-left-width: 2px;">主页</a></li>
+            <li><a class="logout" href="login.html" style="border-left: #ebebeb;border-left-style: solid;border-left-width: 2px;">退出登录</a></li>
+        </ul>
+    </div>
+</div>
+<div class="welhead">
+    <h5>福州大学虚拟仿真实验平台欢迎您</h5>
+</div>
+<div class="pchead2">
+</div>
+<div class="navigation_bar">
+    <ul>
+        <li><a class="prepare" href="prepare.html">预习测试</a></li>
+        <li><a class="experiment" href="experiment.html">进入实验</a></li>
+        <li><a class="report" href="report.html">实验报告</a></li>
+        <li><a class="resources" href="resources.html">教学资源</a></li>
+        <li><a class="notification" href="notification.html">通知公告</a></li>
+    </ul>
+</div>
+<div class="loginbody" style="height: 1100px;" >
+    <p class="home_title">基于Unity3D的乙酰乙酸乙酯合成虚拟仿真实验</p>
+    <div class="homeBody1">
+        <div class="warp">
+            <ul class="list">
+                <li class="item active"></li>
+                <li class="item"></li>
+                <li class="item"></li>
+            </ul>
+            <ul class="pointList">
+                <li class="point active" data-index="0"></li>
+                <li class="point" data-index="1"></li>
+                <li class="point" data-index="2"></li>
+            </ul>
+            <button type="button" class="btn" id="goPre"><</button>
+            <button type="button" class="btn" id="goNext">></button>
+        </div>
+        <p style="font-size: 25px;text-align: center;padding-top:50px;padding-right: 30px;">（1）开始实验前请仔细阅读操作说明</p>
+    </div>
+    <div class="homeBody2">
+                <div class="homeBody_content">
+                    <h3>实验简介</h3>
+                    <div style="background-color: #e7f2fe;margin-top: 20px;" >
+                        <marquee behavior="scroll" direction="up" height="275" scrollamount="1">
+                            <p class="p1" style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;实验教学是化学教学中不可缺少的环节，实验在理论的理解以及诸多技能的获取中起着重要的作用。乙酰乙酸乙酯的合成是有机化学实验（下）的一个重难点实验。然而由于（反应时间长，所用试剂较危险，且由于化学反应的不可逆性，一旦步骤出错只能重新实验，耗费较多时间精力），使得学生在学校实验室里（难以在较短的时间内对该实验有较好的掌握）。因此需要找一种替代性的教学方式来解决上述问题。本项目使用Unity3D作为虚拟实验室开发工具，结合“乙酰乙酸乙酯的合成”实验构建出了一套全三维场景、交互性的虚拟仿真实验项目，实现了对实验原理及操作过程的全方位三维立体展示。可以作为有机化学实验（下）教学的辅助手段来直观地展示实验原理以及操作过程，帮助学生加深对实验的理解，节省了实验试剂和不必要的时间浪费，避免了实验过程中可能发生的意外事故。构建了一种全新的交互式实验教学模式，为开放式实验教学的开展提供了有力的支持。</p>
+                        </marquee>
+                    </div>
+                </div>
+                <div class="homeBody_content">
+                    <h3>实验视频</h3>
+                    <div style="margin-top: 20px;">
+                        <video src="https://vdse.bdstatic.com//bdc874a42e64bdae687a79bce491ceb7?authorization=bce-auth-v1/fb297a5cc0fb434c971b8fa103e8dd7b/2017-05-11T09:02:31Z/-1//b43cb9a9a9562ddc0ad1a20bac060fb69624d9209a62e0d15bb1b19720879f59" controls="controls" poster="../upload/EVL/08190/fm.png"  style="width:100%;height: 278px;">
+                            您的浏览器不支持 video 标签。
+                        </video>
+                    </div>
+                </div>
+    </div>
+</div>
+</div>
+<div class="homebm">
+    <h5>版权所有&copy		     福州大学开发</h5>
+</div>
+</body>
+<script src="js/zoom.js"></script>
+<script src="js/slideshow.js"></script>
+</html>

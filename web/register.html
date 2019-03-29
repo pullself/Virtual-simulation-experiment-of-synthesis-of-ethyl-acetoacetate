@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册界面</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <style>
+        .icon-user{background: url("img/user.png") no-repeat;background-size: 50px;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="img/logo.gif" class="logo">
+    <img src="img/logo2.png" class="logo2">
+</div>
+<div class="loginbody" >
+    <div align="right">
+        <div class="loginbox"  style="margin-right: 80px !important;margin-top: 40px;">
+            <form name="LogonForm" method="post" onSubmit="return doLoginNow(this);">
+                <ul align="left" style="text-align: center;">
+                    <li>
+                        <h3 style="font-weight: 700">用户注册</h3>
+                    </li>
+                    <li>
+                        <input name="userid" type="text" class="loginuser" value="" placeholder="学号/手机号/用户名" onclick="JavaScript:this.value=''"/>
+                        <span class="icon-user"></span>
+                    </li>
+                    <li>
+                        <input name="name" type="text" class="loginpwd" value="" placeholder="姓名" onclick="JavaScript:this.value=''"/>
+                    </li>
+                    <li>
+                        <input name="password" type="password" class="loginpwd" value="" placeholder="密码" onclick="JavaScript:this.value=''"/>
+                    </li>
+                    <li>
+                        <input name="re_password" type="password" class="loginpwd" value="" placeholder="确认密码" onclick="JavaScript:this.value=''"/>
+                    </li>
+                    <li>
+                        <input name="stu_num" type="text" class="loginpwd" value="" placeholder="学号" onclick="JavaScript:this.value=''"/>
+                    </li>
+                    <li style="font-size:16px;margin-top: 30px;">
+                        <input name="submit" type="submit" class="loginbtn" value="立即注册"/>
+                    </li>
+                    <li  style=" text-align: center;margin-top: 20px;">
+                        <p style="font-size:18px;">已有账号？<a href="login.html" style="font-size:18px;color:#96b6d7">请直接登录</a> </p>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    var loginbtn = document.getElementsByName('submit')
+    loginbtn[0].addEventListener('click',function () {
+        alert("系统暂未开放，请使用游客体验功能");
+    })
+</script>
+
+<div class="loginbm">
+    <h5>版权所有&copy		    福州大学开发</h5>
+</div>
+</body>
+<script src="js/zoom.js"></script>
+</html>
