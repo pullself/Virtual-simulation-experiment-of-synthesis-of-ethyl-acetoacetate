@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Lab_step_4 : MonoBehaviour
 {
+    public Material waterTransparentMat;
     public GameObject waterTube;
     public GameObject rope_water_to_eq;
     public GameObject rope_eq_to_water;
@@ -137,6 +138,7 @@ public class Lab_step_4 : MonoBehaviour
                     if (myChoice.Equals("弱酸性"))
                     {
                         isCorrect = true;
+                        Invoke("state_4_delay_fun", 2.5f);
                     }
                     break;
             }
@@ -193,8 +195,14 @@ public class Lab_step_4 : MonoBehaviour
 
     }
 
+    void state_4_delay_fun()
+    {
+        waterYuanDiShaoPing.GetComponent<Renderer>().material = waterTransparentMat;
+    }
+
     GameObject xiKouPingCuSuan;
     GameObject stopperCuSuan;
+    GameObject waterYuanDiShaoPing;
 
     void RaycastResultJudge(RaycastHit hitInfo, bool isMouseDown, bool isMouseUp)
     {
@@ -311,6 +319,7 @@ public class Lab_step_4 : MonoBehaviour
                 case 4:
                     if (hitInfo.collider.name.Equals("yuanDiShaoPing"))
                     {
+                        waterYuanDiShaoPing = hitInfo.collider.transform.Find("waterC8H10").gameObject;
                         multiSelectionIsOpened = true;
                         UIManager.ShowMultiSelection(new string[] { "请选择",
                                                                     "强酸性",

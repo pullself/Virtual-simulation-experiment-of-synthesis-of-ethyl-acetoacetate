@@ -8,6 +8,7 @@ public class Score_SceneManager : MonoBehaviour
 {
     public GameObject canves;
     public GameObject warnTip;
+    public GameObject correctTip;
     public GameObject scorePanel;
     public RectTransform scorePanelInPos;
     public RectTransform scorePanelOutPos;
@@ -34,6 +35,7 @@ public class Score_SceneManager : MonoBehaviour
     private int[] scores;
     private int index;
     private AudioSource audioSourse;
+    private AudioClip audioClipSou;
     private bool loadFinished = false;
     //public Vector3 testPos0;
     //public Vector3 testPos1;
@@ -47,6 +49,7 @@ public class Score_SceneManager : MonoBehaviour
         Cursor.visible = true;
 
         audioSourse = Camera.main.GetComponent<AudioSource>();
+        audioClipSou = audioSourse.clip;
         scoreTexts = new Text[scoreItems.Length];
         for (int i = 0; i < scoreItems.Length; i++)
         {
@@ -130,6 +133,7 @@ public class Score_SceneManager : MonoBehaviour
 
     void PlayAudio()
     {
+        audioSourse.clip = audioClipSou;
         audioSourse.Play();
     }
 
@@ -198,15 +202,15 @@ public class Score_SceneManager : MonoBehaviour
         string userPwd = userPwdText.text;
         if (userId.Equals("") && userPwd.Equals(""))
         {
-            ShowWarnTip("账号和密码不能为空", Color.red);
+            ShowWarnTip("账号和密码不能为空");
         }
         else if (userId.Equals(""))
         {
-            ShowWarnTip("账号不能为空", Color.red);
+            ShowWarnTip("账号不能为空");
         }
         else if (userPwd.Equals(""))
         {
-            ShowWarnTip("密码不能为空", Color.red);
+            ShowWarnTip("密码不能为空");
         }
 
         bool hasLogined = false;
@@ -216,10 +220,10 @@ public class Score_SceneManager : MonoBehaviour
             switch (mySQLConnector.Check_Id_Pwd(userId, userPwd))
             {
                 case -1:
-                    ShowWarnTip("账号不存在", Color.red);
+                    ShowWarnTip("账号不存在");
                     break;
                 case -2:
-                    ShowWarnTip("密码错误", Color.red);
+                    ShowWarnTip("密码错误");
                     break;
                 case 0:
                     //ShowWarnTip("正确", Color.green);
@@ -230,7 +234,7 @@ public class Score_SceneManager : MonoBehaviour
         }
         else
         {
-            ShowWarnTip("连接服务器出错，请检查网络连接", Color.red);
+            ShowWarnTip("连接服务器出错，请检查网络连接");
         }
 
         if(hasLogined)
@@ -238,19 +242,19 @@ public class Score_SceneManager : MonoBehaviour
             if (mySQLConnector.OpenSqlConnection())
             {
                 string sqlStr;
-                sqlStr = string.Format("delete from experimentscore where stuId={0};", userId);
+                sqlStr = string.Format("delete from experimentscore where stuId='{0}';", userId);
                 mySQLConnector.Exec(sqlStr);
-                sqlStr = string.Format("insert into experimentscore values({0},{1},{2},{3},{4},{5},{6},{7},{8})",
+                sqlStr = string.Format("insert into experimentscore values('{0}',{1},{2},{3},{4},{5},{6},{7},{8})",
                                                 userId,
                                                 scores[1], scores[2], scores[3], scores[4], scores[5], scores[6], scores[7],scores[8]);
                 mySQLConnector.Exec(sqlStr);
                 mySQLConnector.CloseConnection();
-                ShowWarnTip("上传成功", Color.green);
+                ShowCorrectTip("上传成功");
                 Invoke("OnBtnCancelLogin", 2f);
             }
             else
             {
-                ShowWarnTip("连接服务器出错，请检查网络连接", Color.red);
+                ShowWarnTip("连接服务器出错，请检查网络连接");
             }
         }
         
@@ -258,13 +262,17 @@ public class Score_SceneManager : MonoBehaviour
 
     }
 
-    void ShowWarnTip(string warnTipText, Color textColor)
+    void ShowWarnTip(string tipText)
     {
         GameObject obj = Instantiate(warnTip, canves.transform) as GameObject;
         Text tx = obj.GetComponent<Text>();
-        tx.text = warnTipText;
-        tx.color = textColor;
+        tx.text = tipText;
     }
 
-
+    void ShowCorrectTip(string tipText)
+    {
+        GameObject obj = Instantiate(correctTip, canves.transform) as GameObject;
+        Text tx = obj.GetComponent<Text>();
+        tx.text = tipText;
+    }
 }

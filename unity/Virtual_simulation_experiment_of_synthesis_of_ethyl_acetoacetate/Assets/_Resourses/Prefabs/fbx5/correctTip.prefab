@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 4386441177205027942}
   - component: {fileID: 4386441177205027941}
   - component: {fileID: 1153669842685486207}
+  - component: {fileID: 300336958809877493}
   m_Layer: 5
-  m_Name: warnTip
+  m_Name: correctTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -93,4 +94,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyDelay: 2
-  warnTipAudio: {fileID: 8300000, guid: d7429a07822e03149b4f0e7eb24c9085, type: 3}
+  tipAudio: {fileID: 0}
+--- !u!114 &300336958809877493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4386441177205027963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0156ad47786d0f549a01fcb55b9b4195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyDelay: 2
+  tipAudio: {fileID: 8300000, guid: c5ee4f9dc8587db4c96d6e77726d2efe, type: 3}

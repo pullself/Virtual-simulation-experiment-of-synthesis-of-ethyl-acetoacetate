@@ -12903,6 +12903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57dd153ab75d5e74a86a6b0b22fbf53c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterTransparentMat: {fileID: 2100000, guid: 721cf77b31eb2124fa764c662ab0d69d, type: 2}
   waterTube: {fileID: 1098790213}
   rope_water_to_eq: {fileID: 1651068766}
   rope_eq_to_water: {fileID: 313618294}

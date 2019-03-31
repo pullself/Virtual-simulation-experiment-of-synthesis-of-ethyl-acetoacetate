@@ -2,23 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class warnTip : MonoBehaviour
+public class tipController : MonoBehaviour
 {
     public float destroyDelay = 2f;
-    public AudioClip warnTipAudio;
+    public AudioClip tipAudio;
     private void Start()
     {
-        Destroy(gameObject, destroyDelay);
-    }
-
-    private void OnDestroy()
-    {
-        if(warnTipAudio!=null)
-        { 
+        if (tipAudio != null)
+        {
             AudioSource audioSourse = Camera.main.GetComponent<AudioSource>();
-            audioSourse.clip = warnTipAudio;
+            audioSourse.clip = tipAudio;
             audioSourse.Play();
         }
-        Destroy(gameObject);
+        Destroy(gameObject, destroyDelay);
     }
+    
 }

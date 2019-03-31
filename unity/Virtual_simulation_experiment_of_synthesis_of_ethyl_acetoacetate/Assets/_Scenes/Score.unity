@@ -4252,6 +4252,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canves: {fileID: 32992321}
   warnTip: {fileID: 4386441177205027963, guid: e89a667a4542e484fb7586bf15a29bd5, type: 3}
+  correctTip: {fileID: 4386441177205027963, guid: e24620334804c7f45b284574c6ca4bf0,
+    type: 3}
   scorePanel: {fileID: 1525398123}
   scorePanelInPos: {fileID: 386470489}
   scorePanelOutPos: {fileID: 145434410}
