@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Lab_step_5 : MonoBehaviour
 {
-    public Animation fenYeLouDouShake;
+    public Animation fenYeLouDouAnim;
     public Material orangeMat;
     public Material fenYeLouDouDownMat;
     public Material fenYeLouDouUpMat;
@@ -138,6 +138,7 @@ public class Lab_step_5 : MonoBehaviour
                     if (myChoice.Equals("和反应液等体积"))
                     {
                         isCorrect = true;
+                        Invoke("state_3_delay_fun", 2.5f);
                     }
                     break;
             }
@@ -187,6 +188,11 @@ public class Lab_step_5 : MonoBehaviour
         //}
     }
 
+    void state_3_delay_fun()
+    {
+        water_big_up.SetActive(true);
+    }
+
     void OnWrongTip()
     {
         if (state == 3)
@@ -203,6 +209,8 @@ public class Lab_step_5 : MonoBehaviour
     GameObject stopperFenYeLouDou;
     GameObject fenYeLouDou;
     GameObject waterZhuiXingPing;
+    GameObject huoSai = null;
+    int rotateRound = 0;
 
     void RaycastResultJudge(RaycastHit hitInfo, bool isMouseDown, bool isMouseUp)
     {
@@ -260,14 +268,29 @@ public class Lab_step_5 : MonoBehaviour
                         if (shakeNumber == 0)
                         {
                             UIManager.OnHandGrab();
+                            if (huoSai == null)
+                                huoSai = hitInfo.collider.transform.Find("huoSai").gameObject;
                         }
                         shakeNumber++;
                         isPlayingAnim = true;
-                        fenYeLouDouShake.PlayQueued(fenYeLouDouShake.clip.name);
-                        Invoke("state_6_delay_fun", fenYeLouDouShake.clip.length);
+                        fenYeLouDouAnim.PlayQueued(fenYeLouDouAnim.clip.name);
+
                         if (shakeNumber == 9)
                         {
-                            hasSelected = true;
+                            isPlayingAnim = true;
+                            fenYeLouDouAnim["fenYeLouDouTilt"].time = 0;
+                            fenYeLouDouAnim["fenYeLouDouTilt"].speed = 1;
+                            fenYeLouDouAnim.PlayQueued("fenYeLouDouTilt");
+                            Invoke("state_6_huoSaiRotate", fenYeLouDouAnim["fenYeLouDouTilt"].length);
+                            rotateRound++;
+                            if (rotateRound == 2)
+                                hasSelected = true;
+                            else
+                                shakeNumber = 0;
+                        }
+                        else
+                        {
+                            Invoke("state_6_delay_fun", fenYeLouDouAnim.clip.length);
                         }
                         //UIManager.OnCorrectChoose();
                         audioManager.PlayAudioCorrect();
@@ -395,7 +418,7 @@ public class Lab_step_5 : MonoBehaviour
                     {
                         waterZhuiXingPing = hitInfo.collider.gameObject.transform.Find("waterZhuiXingPing").gameObject;
 
-                        Invoke("state_9_delay_fun", 4f);
+                        Invoke("state_9_delay_fun", 5f);
                         PlayAnimation();
                         hasSelected = false;
                     }
@@ -421,11 +444,26 @@ public class Lab_step_5 : MonoBehaviour
         isPlayingAnim = false;
     }
 
+    void state_6_huoSaiRotate()
+    {
+        Animation anim = huoSai.GetComponent<Animation>();
+        anim.PlayQueued(anim.clip.name);
+        Invoke("state_6_fenYeLouDou_recover", anim.clip.length);
+    }
+
+    void state_6_fenYeLouDou_recover()
+    {
+        fenYeLouDouAnim["fenYeLouDouTilt"].time = fenYeLouDouAnim["fenYeLouDouTilt"].length;
+        fenYeLouDouAnim["fenYeLouDouTilt"].speed = -1;
+        fenYeLouDouAnim.Play("fenYeLouDouTilt");
+        Invoke("state_6_delay_fun", fenYeLouDouAnim["fenYeLouDouTilt"].length);
+    }
+
     void state_0_delay_func()
     {
         waterC8H10.SetActive(false);
         water_small.SetActive(false);
-        water_big_up.SetActive(true);
+        water_big_up.SetActive(false);
         water_big_down.SetActive(true);
         water_big_up.GetComponent<Renderer>().material = orangeMat;
         water_big_down.GetComponent<Renderer>().material = orangeMat;
@@ -434,16 +472,19 @@ public class Lab_step_5 : MonoBehaviour
 
     void state_8_delay_fun()
     {
-        water_big_down.SetActive(false);
-        water_big_up.SetActive(false);
-        water_small.SetActive(true);
-        water_small.GetComponent<Renderer>().material = fenYeLouDouUpMat;
+        //water_big_down.SetActive(false);
+        //water_big_up.SetActive(false);
+        //water_small.SetActive(true);
+        //water_small.GetComponent<Renderer>().material = fenYeLouDouUpMat;
 
+        water_big_up.SetActive(false);
+        water_big_down.GetComponent<Renderer>().material = fenYeLouDouUpMat;
     }
 
     void state_9_delay_fun()
     {
-        water_small.SetActive(false);
+        water_big_down.SetActive(false);
+        //water_small.SetActive(false);
         waterZhuiXingPing.SetActive(true);
     }
 

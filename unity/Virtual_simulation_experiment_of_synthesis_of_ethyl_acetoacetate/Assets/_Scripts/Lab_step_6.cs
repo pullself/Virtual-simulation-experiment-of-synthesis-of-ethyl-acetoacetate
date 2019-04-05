@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Lab_step_6 : MonoBehaviour
 {
+    public GameObject jiaoTouDiGuanTou;
     public GameObject waterXiLvPing;
     public Material zhuiXingPingWaterMat;
     public GameObject rope;
@@ -366,7 +367,6 @@ public class Lab_step_6 : MonoBehaviour
                         Invoke("OnAnimationFinished", 2f);
                     }
                     break;
-
                 case 8:
                     if (hitInfo.collider.name.Equals("tableMat"))
                     {
@@ -385,6 +385,17 @@ public class Lab_step_6 : MonoBehaviour
                     if (hitInfo.collider.name.Equals("buShiLouDou"))
                     {
                         PlayAnimation();
+
+                        Invoke("state_10_ball_to_small", 0.5f * 2f);        //首次 放下前 挤压 胶头滴管 吸取
+                        Invoke("state_10_ball_to_big", 0.5f * 3f + 0.1f);   //首次 放下后 放松 胶头滴管 吸取
+                        Invoke("state_10_ball_to_small", 0.5f * 8f);        //首次 放下后 放松 胶头滴管 释放
+                        Invoke("state_10_ball_to_big", 0.5f * 10f + 0.1f);  //首次 放下后 放松 胶头滴管 释放完成
+
+                        Invoke("state_10_ball_to_small", 0.5f * 12f);       //第二次 放下前 挤压 胶头滴管 吸取
+                        Invoke("state_10_ball_to_big", 0.5f * 13f + 0.1f);  //第二次 放下后 放松 胶头滴管 吸取
+                        Invoke("state_10_ball_to_small", 0.5f * 18f);       //第二次 放下后 放松 胶头滴管 释放
+                        Invoke("state_10_ball_to_big", 0.5f * 20f + 0.1f);  //第二次 放下后 放松 胶头滴管 释放完成
+
                         hasSelected = false;
                     }
                     break;
@@ -415,6 +426,24 @@ public class Lab_step_6 : MonoBehaviour
     {
         fenMoSmall.transform.SetParent(buShiLouDou.transform);
 
+    }
+
+    void state_10_ball_to_small()
+    {
+        iTween.ScaleTo(jiaoTouDiGuanTou, iTween.Hash(
+                        "time", 0.5f,
+                        "easetype", iTween.EaseType.linear,
+                        "x", 0.015,
+                        "z", 0.015));
+    }
+
+    void state_10_ball_to_big()
+    {
+        iTween.ScaleTo(jiaoTouDiGuanTou, iTween.Hash(
+                        "time", 0.5f,
+                        "easetype", iTween.EaseType.linear,
+                        "x", 0.03,
+                        "z", 0.03));
     }
 
     void OnAnimationStart() {}

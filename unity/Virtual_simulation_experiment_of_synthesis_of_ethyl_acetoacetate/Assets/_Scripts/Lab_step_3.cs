@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Lab_step_3 : MonoBehaviour
 {
+    public GameObject yiYeGuan_single_1;
+    public GameObject xiErQiu_single_1;
+    public GameObject yiYeGuanWithBall;
+    public GameObject yiYeGuan_single_2;
+    public GameObject xiErQiu_single_2;
+    public GameObject ballOnYiYeGuan;
+
     public GameObject rope_water_to_eq;
     public GameObject rope_eq_to_water;
     public GameObject waterTube;
@@ -34,6 +41,13 @@ public class Lab_step_3 : MonoBehaviour
 
     void Start()
     {
+        yiYeGuan_single_1.SetActive(true);
+        xiErQiu_single_1.SetActive(true);
+        yiYeGuanWithBall.SetActive(false);
+        yiYeGuan_single_2.SetActive(false);
+        xiErQiu_single_2.SetActive(false);
+
+
         ScoreManager.InitScore(key);
 
         waterTube.SetActive(false);
@@ -146,8 +160,14 @@ public class Lab_step_3 : MonoBehaviour
                 PlayAnimation();
                 audioManager.PlayAudioCorrect();
                 if(state==4)
-                { 
-                    Invoke("state_4_delay_func", 3.5f);
+                {
+                    Invoke("state_4_delay_showWater", 1.5f + 1.5f + 0.5f * 7f + 0.25f);
+                    Invoke("state_4_hide_single_1", 3f);
+                    Invoke("state_4_show_single_2", 8.5f);
+                    Invoke("state_4_ball_to_small", 1.5f + 1.5f);
+                    Invoke("state_4_ball_to_big", 1.5f + 1.5f + 0.5f * 1f + 0.1f);
+                    Invoke("state_4_ball_to_small", 1.5f + 1.5f + 0.5f * 7f);
+                    Invoke("state_4_ball_to_big", 1.5f + 1.5f + 0.5f * 10f);
                     PlayAnimation();
                 }
             }
@@ -213,6 +233,38 @@ public class Lab_step_3 : MonoBehaviour
         {
             UIManager.UpdateInfo(new string[] { "选择的通冷凝水的方法错误", "请重新选择" });
         }
+    }
+
+    void state_4_hide_single_1()
+    {
+        yiYeGuan_single_1.SetActive(false);
+        xiErQiu_single_1.SetActive(false);
+        yiYeGuanWithBall.SetActive(true);
+    }
+
+    void state_4_show_single_2()
+    {
+        yiYeGuan_single_2.SetActive(true);
+        xiErQiu_single_2.SetActive(true);
+        yiYeGuanWithBall.SetActive(false);
+    }
+
+    void state_4_ball_to_small()
+    {
+        iTween.ScaleTo(ballOnYiYeGuan, iTween.Hash(
+                        "time", 0.5f,
+                        "easetype", iTween.EaseType.linear,
+                        "y", 1f / 3f,
+                        "z", 1f / 3f));
+    }
+
+    void state_4_ball_to_big()
+    {
+        iTween.ScaleTo(ballOnYiYeGuan, iTween.Hash(
+                        "time", 0.5f,
+                        "easetype", iTween.EaseType.linear,
+                        "y", 2f / 3f,
+                        "z", 2f / 3f));
     }
 
     void state_4_delay_fun()
@@ -410,7 +462,7 @@ public class Lab_step_3 : MonoBehaviour
         waterYuanDiShaoPing.SetActive(false);
     }
 
-    void state_4_delay_func()
+    void state_4_delay_showWater()
     {
         waterYuanDiShaoPing.SetActive(true);
     }
