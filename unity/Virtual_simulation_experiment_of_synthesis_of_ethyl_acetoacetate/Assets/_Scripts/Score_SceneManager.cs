@@ -244,7 +244,7 @@ public class Score_SceneManager : MonoBehaviour
                 string sqlStr;
                 sqlStr = string.Format("delete from experimentscore where stuId='{0}';", userId);
                 mySQLConnector.Exec(sqlStr);
-                sqlStr = string.Format("insert into experimentscore values('{0}',{1},{2},{3},{4},{5},{6},{7},{8})",
+                sqlStr = string.Format("insert into experimentscore(stuId,Lab_1,lab_2,lab_3,lab_4,lab_5,lab_6,lab_7,lab_8) values('{0}',{1},{2},{3},{4},{5},{6},{7},{8})",
                                                 userId,
                                                 scores[1], scores[2], scores[3], scores[4], scores[5], scores[6], scores[7],scores[8]);
                 mySQLConnector.Exec(sqlStr);

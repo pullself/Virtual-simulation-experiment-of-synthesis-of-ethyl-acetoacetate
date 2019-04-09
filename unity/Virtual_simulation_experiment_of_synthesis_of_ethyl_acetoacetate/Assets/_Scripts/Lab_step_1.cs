@@ -31,9 +31,13 @@ public class Lab_step_1 : MonoBehaviour
     private bool multiSelectionIsOpened = false;
     private bool btnNextSceneOpened = false;
     private string key = "Lab_1";
-    
+    private TuTorManager tuTorManager;
+    private bool dragTutorIsFirst;
     void Start()
     {
+        dragTutorIsFirst = true;
+        tuTorManager = GetComponent<TuTorManager>();
+        tuTorManager.ShowTutorClick();
         ScoreManager.InitScore(key);
 
         waterTube.SetActive(false);
@@ -87,6 +91,12 @@ public class Lab_step_1 : MonoBehaviour
                     {
                         DraughtCupboardDoor door = hitInfo.collider.gameObject.GetComponent<DraughtCupboardDoor>();
                         door.OnMyMouseDown();
+                        tuTorManager.EndTutorClick();
+                        if (dragTutorIsFirst)
+                        {
+                            tuTorManager.ShowTutorDrag();
+                            dragTutorIsFirst = false;
+                        }
                     }
                 }
                 else
@@ -353,6 +363,7 @@ public class Lab_step_1 : MonoBehaviour
                     {
                         PlayAnimation();
                         hasSelected = false;
+                        tuTorManager.EndTutorDrag();
                     }
                     break;
                 case 1:

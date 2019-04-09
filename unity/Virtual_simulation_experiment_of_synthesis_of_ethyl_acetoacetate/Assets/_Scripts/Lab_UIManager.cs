@@ -129,7 +129,9 @@ public class Lab_UIManager : MonoBehaviour
             if(firstPersonController.enabled)
             {
                 Debug.Log("unlock");
-                UpdateInfo(new string[] { "已解除鼠标锁定", "按ESC键重新锁定" });
+                //UpdateInfo(new string[] { "已解除鼠标锁定", "按ESC键重新锁定" });
+                audioManager.Read("已解除鼠标锁定");
+                Invoke("f1", 3f);
                 isReLock = false;
                 firstPersonController.enabled = false;
                 firstPersonController.m_MouseLook.lockCursor = false;
@@ -139,7 +141,9 @@ public class Lab_UIManager : MonoBehaviour
             else
             {
                 Debug.Log("lock");
-                UpdateInfo(new string[] { "已将鼠标锁定", "按鼠标左键继续操作" });
+                //UpdateInfo(new string[] { "已将鼠标锁定", "按鼠标左键继续操作" });
+                audioManager.Read("已将鼠标锁定");
+                Invoke("f2", 3f);
                 isReLock = true;
                 firstPersonController.enabled = true;
                 firstPersonController.m_MouseLook.lockCursor = true;
@@ -148,7 +152,17 @@ public class Lab_UIManager : MonoBehaviour
             }
         }
     }
-    
+
+    void f1()
+    {
+        audioManager.Read("按ESC键重新锁定");
+    }
+
+    void f2()
+    {
+        audioManager.Read("按鼠标左键继续操作");
+    }
+
     public void UpdateInfo(string text, float duration = float.MaxValue)
     {
         audioManager.Read(text);
