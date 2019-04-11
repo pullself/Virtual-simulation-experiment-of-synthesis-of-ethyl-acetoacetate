@@ -10,6 +10,7 @@ public class Lab_step_8 : MonoBehaviour
     public GameObject rope_beng;
     public GameObject rope_water_to_eq;
     public GameObject rope_eq_to_water;
+    public GameObject rope_anQuanPing;
     
     public DraughtCupboardDoor doorLeft;
     public DraughtCupboardDoor doorRight;
@@ -37,13 +38,14 @@ public class Lab_step_8 : MonoBehaviour
 
     void Start()
     {
-        ScoreManager.InitScore(key);
+        ScoreManager.InitScore(key,20);
 
         waterAnQuanPing.SetActive(false);
         fire.SetActive(false);
         rope_beng.SetActive(false);
         rope_eq_to_water.SetActive(false);
         rope_water_to_eq.SetActive(false);
+        rope_anQuanPing.SetActive(false);
 
         Camera.main.fieldOfView = defaultFov;
         Camera camera = magnifierCamera.GetComponent<Camera>();
@@ -165,7 +167,7 @@ public class Lab_step_8 : MonoBehaviour
             {
                 Invoke("OnWrongTip", 1f);
                 audioManager.PlayAudioWrong();
-                ScoreManager.AddScore(-20);
+                ScoreManager.AddScore(-10);
             }
         }
 
@@ -302,7 +304,7 @@ public class Lab_step_8 : MonoBehaviour
             {
                 //UIManager.OnWrongChoose();
                 UIManager.OnHandForbidden();
-                ScoreManager.AddScore(-5);
+                ScoreManager.AddScore(-1);
             }
         }
         else if (hasSelected == true && isMouseUp)
@@ -417,7 +419,7 @@ public class Lab_step_8 : MonoBehaviour
                 hasSelected = false;
                 //UIManager.OnWrongChoose();
                 UIManager.OnHandForbidden();
-                ScoreManager.AddScore(-5);
+                ScoreManager.AddScore(-1);
             }
         }
     }
@@ -468,7 +470,7 @@ public class Lab_step_8 : MonoBehaviour
                 str = "请安装温度计";
                 break;
             case 5:
-                str = "请安装直形冷凝管";
+                str = "请安装冷凝管";
                 break;
             case 6:
                 str = "请安装尾接管";
@@ -480,6 +482,7 @@ public class Lab_step_8 : MonoBehaviour
                 str = "请安装安全瓶";
                 break;
             case 9:
+                rope_anQuanPing.SetActive(true);
                 str = "请为冷凝管通水";
                 break;
             case 10:
@@ -500,6 +503,10 @@ public class Lab_step_8 : MonoBehaviour
         waterAnQuanPing.SetActive(true);
         state = -1;
         UIManager.StopUpdateTime();
+        if (Time.time - UIManager.startSceneTime > 360f)    //超过6分钟
+        {
+            ScoreManager.AddScore(-999);                    //分数置0
+        }
         UIManager.UpdateInfo("实验完成");
         btnNextSceneOpened = true;
         UIManager.ShowBtnNextScene("查看实验成绩");

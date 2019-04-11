@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Lab_wallText : MonoBehaviour
 {
-    string url = "http://182.254.187.40:8080/home.html";
+    string url = "http://182.254.187.40:8088/login.html";
     
     private void OnMouseDown()
     {

@@ -11,7 +11,7 @@ public static class ScoreManager
         score = -1;
     }
 
-    static public void InitScore(string key, int maxVal = 100)
+    static public void InitScore(string key, int maxVal)
     {
         score = maxVal;
         PlayerPrefs.DeleteKey(key);

@@ -37,7 +37,7 @@ public class Lab_step_7 : MonoBehaviour
 
     void Start()
     {
-        ScoreManager.InitScore(key);
+        ScoreManager.InitScore(key,15);
 
         rope_water_to_eq.SetActive(false);
         rope_eq_to_water.SetActive(false);
@@ -145,11 +145,19 @@ public class Lab_step_7 : MonoBehaviour
                     {
                         isCorrect = true;
                     }
+                    else
+                    {
+                        ScoreManager.AddScore(-10);
+                    }
                     break;
                 case 8:
                     if (myChoice.Equals("下进上出"))
                     {
                         isCorrect = true;
+                    }
+                    else
+                    {
+                        ScoreManager.AddScore(-5);
                     }
                     break;
             }
@@ -172,7 +180,6 @@ public class Lab_step_7 : MonoBehaviour
             {
                 Invoke("OnWrongTip", 1f);
                 audioManager.PlayAudioWrong();
-                ScoreManager.AddScore(-20);
             }
         }
 
@@ -301,7 +308,7 @@ public class Lab_step_7 : MonoBehaviour
             {
                 //UIManager.OnWrongChoose();
                 UIManager.OnHandForbidden();
-                ScoreManager.AddScore(-5);
+                ScoreManager.AddScore(-1);
             }
         }
         else if (hasSelected == true && isMouseUp)
@@ -369,7 +376,7 @@ public class Lab_step_7 : MonoBehaviour
                     }
                     break;
                 case 7:
-                    if (hitInfo.collider.name.Equals("tableMat"))
+                    if (hitInfo.collider.name.Equals("tableMat") || hitInfo.collider.name.Equals("weiJieGuan"))
                     {
                         PlayAnimation();
                         hasSelected = false;
@@ -408,7 +415,7 @@ public class Lab_step_7 : MonoBehaviour
                 hasSelected = false;
                 //UIManager.OnWrongChoose();
                 UIManager.OnHandForbidden();
-                ScoreManager.AddScore(-5);
+                ScoreManager.AddScore(-1);
             }
         }
     }
@@ -464,7 +471,7 @@ public class Lab_step_7 : MonoBehaviour
                 str = "请安装温度计";
                 break;
             case 5:
-                str = "请安装直形冷凝管";
+                str = "请安装冷凝管";
                 break;
             case 6:
                 str = "请安装尾接管";
@@ -491,6 +498,10 @@ public class Lab_step_7 : MonoBehaviour
         waterZhuiXingPing.SetActive(true);
         state = -1;
         UIManager.StopUpdateTime();
+        if (Time.time - UIManager.startSceneTime > 360f)    //超过6分钟
+        {
+            ScoreManager.AddScore(-999);                    //分数置0
+        }
         UIManager.UpdateInfo("实验第七部分完成");
         btnNextSceneOpened = true;
         UIManager.ShowBtnNextScene("进入第八部分");

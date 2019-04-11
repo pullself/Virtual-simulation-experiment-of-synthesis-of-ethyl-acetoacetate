@@ -18,7 +18,7 @@ public class _testForScoreManager : MonoBehaviour
     private void OnGUI()
     {
         if (GUILayout.Button("init"))
-            ScoreManager.InitScore("key");
+            ScoreManager.InitScore("key",100);
         if (GUILayout.Button("add"))
             ScoreManager.AddScore(-5);
         if (GUILayout.Button("get"))

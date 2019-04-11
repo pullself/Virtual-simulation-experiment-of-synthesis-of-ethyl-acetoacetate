@@ -70,6 +70,7 @@ public class Score_SceneManager : MonoBehaviour
     {
         float sum = 0;
         string preStr = "Lab_";
+        string[] str = { "", "/15", "/5", "/15", "/10", "/10", "/10", "/15", "/20" };
         for (int i = 1; i <= 8; i++)
         {
             string key = preStr + i.ToString();
@@ -77,11 +78,10 @@ public class Score_SceneManager : MonoBehaviour
             score = score >= 0 ? score : 0;
             scores[i] = score;
             sum += score;
-            scoreTexts[i].text = score.ToString();
+            scoreTexts[i].text = score.ToString() + str[i];
         }
-        float avg = sum / 8;
-        int finalScore = (int)(Mathf.Round(avg));
-        scoreTexts[0].text = finalScore.ToString();
+        int finalScore = (int)(Mathf.Round(sum));
+        scoreTexts[0].text = finalScore.ToString() + "/100";
         return finalScore;
     }
 

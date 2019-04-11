@@ -44,10 +44,12 @@ public class Lab_UIManager : MonoBehaviour
     [HideInInspector]
     public bool isReLock = false;
 
+    [HideInInspector]
+    public float startSceneTime;
+
     private float lastUpdateTime;
     private float duration;
     private bool menuIsIn = true;
-    private float startSceneTime;
     private string doseSelectionDanWei;
     private AudioManager audioManager;
 

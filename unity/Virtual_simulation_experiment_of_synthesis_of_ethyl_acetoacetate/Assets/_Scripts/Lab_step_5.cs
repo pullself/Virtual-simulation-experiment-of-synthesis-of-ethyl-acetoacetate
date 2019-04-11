@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Lab_step_5 : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioClip ci;
     public Animation fenYeLouDouAnim;
     public Material orangeMat;
     public Material fenYeLouDouDownMat;
@@ -36,7 +38,7 @@ public class Lab_step_5 : MonoBehaviour
 
     void Start()
     {
-        ScoreManager.InitScore(key);
+        ScoreManager.InitScore(key,10);
 
         Camera.main.fieldOfView = defaultFov;
         Camera camera = magnifierCamera.GetComponent<Camera>();
@@ -149,7 +151,7 @@ public class Lab_step_5 : MonoBehaviour
             }
             else
             {
-                ScoreManager.AddScore(-20);
+                ScoreManager.AddScore(-10);
                 Invoke("OnWrongTip", 1f);
                 audioManager.PlayAudioWrong();
             }
@@ -325,7 +327,7 @@ public class Lab_step_5 : MonoBehaviour
             {
                 //UIManager.OnWrongChoose();
                 UIManager.OnHandForbidden();
-                ScoreManager.AddScore(-5);
+                ScoreManager.AddScore(-1);
             }
         }
         else if (hasSelected == true && (isMouseUp || state == 6)) 
@@ -434,7 +436,7 @@ public class Lab_step_5 : MonoBehaviour
                 hasSelected = false;
                 //UIManager.OnWrongChoose();
                 UIManager.OnHandForbidden();
-                ScoreManager.AddScore(-5);
+                ScoreManager.AddScore(-1);
             }
         }
     }
@@ -448,7 +450,14 @@ public class Lab_step_5 : MonoBehaviour
     {
         Animation anim = huoSai.GetComponent<Animation>();
         anim.PlayQueued(anim.clip.name);
+        Invoke("state_6_audio_ci", 0.5f);
         Invoke("state_6_fenYeLouDou_recover", anim.clip.length);
+    }
+
+    void state_6_audio_ci()
+    {
+        audioSource.clip = ci;
+        audioSource.Play();
     }
 
     void state_6_fenYeLouDou_recover()
@@ -563,6 +572,10 @@ public class Lab_step_5 : MonoBehaviour
                 str = "实验第五部分完成";
                 state = -1;
                 UIManager.StopUpdateTime();
+                if (Time.time - UIManager.startSceneTime > 360f)    //超过6分钟
+                {
+                    ScoreManager.AddScore(-999);                    //分数置0
+                }
                 btnNextSceneOpened = true;
                 UIManager.ShowBtnNextScene("进入第六部分");
                 ScoreManager.SaveScore(key);

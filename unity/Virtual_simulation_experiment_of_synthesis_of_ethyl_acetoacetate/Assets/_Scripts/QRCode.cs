@@ -43,12 +43,12 @@ public class QRCode : MonoBehaviour,IBeginDragHandler,IDragHandler,IPointerDownH
     //double click
     private float doubleClickDelay = 0.3f;
     private float lastClickTime = -1;
-    string url = "http://182.254.187.40:8080/home.html";
+    public string url = "http://182.254.187.40:8080/home.html";
 
     void OnDoubleClick()
     {
-        Debug.Log(url);
-        //Application.OpenURL(url);
+        //Debug.Log(url);
+        Application.OpenURL(url);
     }
 
     public void OnPointerDown(PointerEventData eventData)

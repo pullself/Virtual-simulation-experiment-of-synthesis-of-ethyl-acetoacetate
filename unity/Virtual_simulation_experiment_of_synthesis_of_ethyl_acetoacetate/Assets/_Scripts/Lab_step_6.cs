@@ -36,7 +36,7 @@ public class Lab_step_6 : MonoBehaviour
 
     void Start()
     {
-        ScoreManager.InitScore(key);
+        ScoreManager.InitScore(key,10);
 
         rope.SetActive(false);
 
@@ -298,7 +298,7 @@ public class Lab_step_6 : MonoBehaviour
             {
                 //UIManager.OnWrongChoose();
                 UIManager.OnHandForbidden();
-                ScoreManager.AddScore(-5);
+                ScoreManager.AddScore(-1);
             }
         }
         else if (hasSelected == true && isMouseUp)
@@ -417,7 +417,7 @@ public class Lab_step_6 : MonoBehaviour
                 hasSelected = false;
                 //UIManager.OnWrongChoose();
                 UIManager.OnHandForbidden();
-                ScoreManager.AddScore(-5);
+                ScoreManager.AddScore(-1);
             }
         }
     }
@@ -512,6 +512,10 @@ public class Lab_step_6 : MonoBehaviour
                 str = "实验第六部分完成";
                 state = -1;
                 UIManager.StopUpdateTime();
+                if (Time.time - UIManager.startSceneTime > 360f)    //超过6分钟
+                {
+                    ScoreManager.AddScore(-999);                    //分数置0
+                }
                 btnNextSceneOpened = true;
                 UIManager.ShowBtnNextScene("进入第七部分");
                 ScoreManager.SaveScore(key);

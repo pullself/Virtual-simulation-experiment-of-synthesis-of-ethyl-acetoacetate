@@ -26,20 +26,21 @@ public class StepsTutorial_SceneManager : MonoBehaviour
         midPos = panelMidPosRT.position;
         rightPos = panelRightPosRT.position;
         nowPanelIndex = panels.Length > 0 ? 0 : -1;
-        for (int i = 0; i < panels.Length; i++) 
-        {
-            panels[i].SetActive(true);
-            if (i == 0)
-            {
-                panels[i].GetComponent<RectTransform>().position = midPos;
-                btnPrevious.SetActive(false);
-            }
-            else
-            {
-                panels[i].GetComponent<RectTransform>().position = rightPos;
-            }
-        }
-        btnBack.SetActive(false);
+        //for (int i = 0; i < panels.Length; i++) 
+        //{
+        //    panels[i].SetActive(true);
+        //    if (i == 0)
+        //    {
+        //        panels[i].GetComponent<RectTransform>().position = midPos;
+        //        btnPrevious.SetActive(false);
+        //    }
+        //    else
+        //    {
+        //        panels[i].GetComponent<RectTransform>().position = rightPos;
+        //    }
+        //}
+        //btnBack.SetActive(false);
+        btnBack.SetActive(true);//
     }
 
     public void SwitchToNextPanel()

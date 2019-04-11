@@ -36,7 +36,7 @@ public class Lab_step_2 : MonoBehaviour
 
     void Start()
     {
-        ScoreManager.InitScore(key);
+        ScoreManager.InitScore(key,5);
 
         rope2_eq_to_water.SetActive(false);
         Camera.main.fieldOfView = defaultFov;
@@ -193,7 +193,7 @@ public class Lab_step_2 : MonoBehaviour
             {
                 //UIManager.OnWrongChoose();
                 UIManager.OnHandForbidden();
-                ScoreManager.AddScore(-5);
+                ScoreManager.AddScore(-1);
             }
         }
         else if (hasSelected == true && isMouseUp)
@@ -252,7 +252,7 @@ public class Lab_step_2 : MonoBehaviour
                 hasSelected = false;
                 //UIManager.OnWrongChoose();
                 UIManager.OnHandForbidden();
-                ScoreManager.AddScore(-5);
+                ScoreManager.AddScore(-1);
             }
         }
     }
@@ -314,6 +314,10 @@ public class Lab_step_2 : MonoBehaviour
                 str = "实验第二部分完成";
                 state = -2;
                 UIManager.StopUpdateTime();
+                if (Time.time - UIManager.startSceneTime > 360f)    //超过6分钟
+                {
+                    ScoreManager.AddScore(-999);                    //分数置0
+                }
                 yuanDiShaoPing.transform.SetParent(null);
                 btnNextSceneOpened = true;
                 UIManager.ShowBtnNextScene("进入第三部分");

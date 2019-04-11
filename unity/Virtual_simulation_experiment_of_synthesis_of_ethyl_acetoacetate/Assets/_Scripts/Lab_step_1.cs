@@ -38,7 +38,7 @@ public class Lab_step_1 : MonoBehaviour
         dragTutorIsFirst = true;
         tuTorManager = GetComponent<TuTorManager>();
         tuTorManager.ShowTutorClick();
-        ScoreManager.InitScore(key);
+        ScoreManager.InitScore(key, 15);
 
         waterTube.SetActive(false);
         rope_eq_to_water.SetActive(false);
@@ -165,7 +165,7 @@ public class Lab_step_1 : MonoBehaviour
             }
             else
             {
-                ScoreManager.AddScore(-20);
+                ScoreManager.AddScore(-5);
                 audioManager.PlayAudioWrong();
                 Invoke("OnWrongTip", 1f);
             }
@@ -207,7 +207,7 @@ public class Lab_step_1 : MonoBehaviour
             }
             else
             {
-                ScoreManager.AddScore(-20);
+                ScoreManager.AddScore(-5);
                 Invoke("OnWrongTip", 1f);
                 audioManager.PlayAudioWrong();
             }
@@ -349,9 +349,9 @@ public class Lab_step_1 : MonoBehaviour
             }
             else
             {
+                ScoreManager.AddScore(-1);
                 //UIManager.OnWrongChoose();
                 UIManager.OnHandForbidden();
-                ScoreManager.AddScore(-5);
             }
         }
         else if(hasSelected == true && isMouseUp)
@@ -473,10 +473,10 @@ public class Lab_step_1 : MonoBehaviour
             }
             else
             {
+                ScoreManager.AddScore(-1);
                 hasSelected = false;
                 //UIManager.OnWrongChoose();
                 UIManager.OnHandForbidden();
-                ScoreManager.AddScore(-5);
             }
         }
     }
@@ -564,6 +564,10 @@ public class Lab_step_1 : MonoBehaviour
         UIManager.UpdateInfo("实验第一部分完成");
         state = -1;
         UIManager.StopUpdateTime();
+        if (Time.time - UIManager.startSceneTime > 360f)    //超过6分钟
+        {
+            ScoreManager.AddScore(-999);                    //分数置0
+        }
         btnNextSceneOpened = true;
         UIManager.ShowBtnNextScene("进入第二部分");
         ScoreManager.SaveScore(key);
