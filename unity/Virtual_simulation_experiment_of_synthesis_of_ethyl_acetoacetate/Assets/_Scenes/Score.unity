@@ -3894,8 +3894,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1146169540}
   m_TextComponent: {fileID: 995342685}
   m_Placeholder: {fileID: 53819743}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -4431,8 +4431,8 @@ MonoBehaviour:
   loginWindowOutPos: {fileID: 996971238}
   userIdInputField: {fileID: 1321214434}
   userPwdInputField: {fileID: 1146169539}
-  userIdText: {fileID: 205350213}
-  userPwdText: {fileID: 995342685}
+  userIdText: {fileID: 1321214434}
+  userPwdText: {fileID: 1146169539}
   animStartDelay: 0
   animRepeatRate: 0.4
   animLength: 2

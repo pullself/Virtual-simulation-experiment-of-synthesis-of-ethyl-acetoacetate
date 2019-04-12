@@ -19,8 +19,10 @@ public class Score_SceneManager : MonoBehaviour
 
     public InputField userIdInputField;
     public InputField userPwdInputField;
-    public Text userIdText;
-    public Text userPwdText;
+    //public Text userIdText;
+    //public Text userPwdText;
+    public InputField userIdText;
+    public InputField userPwdText;
 
     public float animStartDelay;
     public float animRepeatRate;
